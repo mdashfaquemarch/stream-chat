@@ -4,6 +4,8 @@ import { createChatRoomService, deleteChatRoomService, getChatRoomService, getUs
 
 export async function createChatRoom(req, res) {
     try {
+        // let {title, roomExpiry} = req.body;
+       
         const response = await createChatRoomService(req.body, req.user);
 
         return res.status(500).json({
@@ -98,7 +100,9 @@ export async function getChatRoom(req, res) {
 
 export async function getUserChatRooms(req, res) {
     try {
+        console.log("Hello");
         const userId = req.user?._id;
+        console.log("get-charoom", userId);
         const chatRooms = await getUserChatRoomsService(userId);
 
         return res.status(200).json({

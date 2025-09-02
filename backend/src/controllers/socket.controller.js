@@ -11,13 +11,19 @@ export function roomSocketHandler(io, socket) {
 }
 
 export function messageSocketHandler(io, socket) {
-    socket.on("send-message", async (data, cb) => {
-        const { slug, chatRoomId, username, message } = data;
+    socket.on("free-message", async (data, cb) => {
+        const { slug, chatRoomId, username, message, isSuper} = data;
+
+        if(isSuper === true) {
+            return cb({
+                message: "this is not allowed",
+            })
+        }
         
         const createdMessage = await sendMessageService({
             username,
             message,
-            chatRoomId
+            chatRoomId,
         })
 
         io.to(slug).emit("new-message", createdMessage);
@@ -27,11 +33,12 @@ export function messageSocketHandler(io, socket) {
 export function isDoneToggleSocketHandler(io, socket) {
     socket.on("toggle-is-done", async ({ slug, messageId, isDone }) => {
 
-        const {id : newMessageId, isDone : done} = await isDoneMessageService({
+        const updatedMessage = await isDoneMessageService({
             messageId,
             isDone
         })
 
-        io.to(slug).emit("is-done-updated", { newMessageId , done });
+        io.to(slug).emit("is-done-updated", updatedMessage);
     });
 }
+

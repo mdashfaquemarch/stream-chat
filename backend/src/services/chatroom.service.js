@@ -11,9 +11,10 @@ const chatRoomRepo = new chatRoomRepository();
 
 export async function createChatRoomService(data, user) {
     try {
-        const { title, duration } = data;
+        const { title, roomExpiry } = data;
 
-        const roomExpiry = new Date(Date.now() + duration * 60 * 60 * 1000); // Convert hours to ms
+        // room expiry
+        const expiry = new Date(Date.now() + Number(roomExpiry) * 60 * 60 * 1000); // Convert hours to ms
         const token = `${title.toLowerCase().replace(/\s+/g, '-')}-${uuidv4()}`;
         console.log("token", token)
         console.log("user", user);
@@ -22,7 +23,7 @@ export async function createChatRoomService(data, user) {
         const createdRoom = await chatRoomRepo.create({
             title: title,
             slug: token,
-            roomExpiry: roomExpiry,
+            roomExpiry: expiry,
             createdBy: user._id,
             isLive: true
         })

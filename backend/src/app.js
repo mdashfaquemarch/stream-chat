@@ -26,6 +26,7 @@ app.use(express.urlencoded({extended: true}));
 
 // importing routes
 import apiRoutes from './routes/index.js';
+import { roomSocketHandler,isDoneToggleSocketHandler, messageSocketHandler } from './controllers/socket.controller.js';
 
 
 
@@ -33,7 +34,9 @@ import apiRoutes from './routes/index.js';
 app.use("/api", apiRoutes);
 
 io.on("connection", (socket) => {
-    joinRoom(io, socket);
+    roomSocketHandler(io, socket);
+    isDoneToggleSocketHandler(io, socket);
+    messageSocketHandler(io, socket);
 });
 
 app.get('/auth/google',
@@ -64,4 +67,4 @@ app.get('/auth/google/callback',
   });
 
 
-export {app};
+export {app, io};

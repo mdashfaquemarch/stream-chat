@@ -12,6 +12,6 @@ router.route("/:id")
 
 router.route("/:slug").get(getChatRoom);
 
-router.route("/user-chatroom").get(isAuth, getUserChatRooms)
+router.route("/").get(isAuth, getUserChatRooms)
 
 export default router;

@@ -6,6 +6,7 @@ const messageSchema = new mongoose.Schema(
     username: { type: String, required: true },
     message: { type: String, required: true },
     isSuper: { type: Boolean, default: false },
+    paymentAmount: { type: Number, default: 0 },
     isDone: {
       type: Boolean,
       default: false

@@ -9,8 +9,8 @@ const isAuth = async function (req, res, next) {
         const token =
             req.cookies?.accessToken ||
             req.header("Authorization")?.replace("Bearer ", "");
-            console.log(req);
-          console.log("token ", token);
+            // console.log(req);
+        //   console.log("token ", token);
         if (!token) {
             throw new AppError("token is required", 401);
         }
