@@ -1,5 +1,5 @@
 import express from 'express';
-import { createChatRoom, deleteChatRoom, getChatRoom, toggleIsLive } from '../../controllers/chatroom.controller.js';
+import { createChatRoom, deleteChatRoom, getChatRoom, getUserChatRooms, toggleIsLive } from '../../controllers/chatroom.controller.js';
 import { isAuth } from '../../middlewares/isAuth.middleware.js';
 
 const router = express.Router();
@@ -12,5 +12,6 @@ router.route("/:id")
 
 router.route("/:slug").get(getChatRoom);
 
+router.route("/user-chatroom").get(isAuth, getUserChatRooms)
 
 export default router;
