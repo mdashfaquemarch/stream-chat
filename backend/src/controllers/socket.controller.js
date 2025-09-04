@@ -2,7 +2,7 @@ import { isDoneMessageService, sendMessageService } from '../services/message.se
 import { JOIN_ROOM } from '../utils/common/event.constants.js'
 
 export function roomSocketHandler(io, socket) {
-    socket.on(JOIN_ROOM, async function roomHandler(data, cb) {
+    socket.on("join-room", async function roomHandler(data, cb) {
         const { slug } = data;
 
         socket.join(slug)

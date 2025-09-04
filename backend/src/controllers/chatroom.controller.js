@@ -79,8 +79,8 @@ export async function getChatRoom(req, res) {
         const response = await getChatRoomService({
             slug: req.params.slug
         }, req.user);
-
-        return res.status(500).json({
+        console.log(response);
+        return res.status(200).json({
             message: "chatroom fetched successfully",
             success: true,
             error: null,

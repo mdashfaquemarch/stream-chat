@@ -16,8 +16,8 @@ export async function createChatRoomService(data, user) {
         // room expiry
         const expiry = new Date(Date.now() + Number(roomExpiry) * 60 * 60 * 1000); // Convert hours to ms
         const token = `${title.toLowerCase().replace(/\s+/g, '-')}-${uuidv4()}`;
-        console.log("token", token)
-        console.log("user", user);
+        // console.log("token", token)
+        // console.log("user", user);
         const slug = `${Config.BASE_URL}/api/v1/chatroom/${token}`;
 
         const createdRoom = await chatRoomRepo.create({
