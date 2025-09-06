@@ -85,12 +85,7 @@ async function verifyOrderService(data) {
             })
 
              // Emit only verified Superchat
-            io.to(slug).emit("new-message", {
-                type: "superchat",
-                name,
-                message,
-                amount
-            });
+            io.to(slug).emit("new-message", data);
 
             return {
                 success: true,

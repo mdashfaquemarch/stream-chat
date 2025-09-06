@@ -21,18 +21,18 @@ async function getMessagesService(data) {
 
     const messages = await Message.find({ chatRoomId }).lean();
 
-    for (let msg of messages) {
-      if (msg.isSuper) {
-        const payment = await Payment.findOne({ messageId: msg._id, status: "succeeded" }).lean();
-        msg.amount = payment?.amount || 0;
-        msg.paymentStatus = payment?.status || "unpaid";
-      } else {
-        msg.amount = 0;
-        msg.paymentStatus = null;
-      }
-    }
+    // for (let msg of messages) {
+    //   if (msg.isSuper) {
+    //     const payment = await Payment.findOne({ messageId: msg._id, status: "succeeded" }).lean();
+    //     msg.amount = payment?.amount || 0;
+    //     msg.paymentStatus = payment?.status || "unpaid";
+    //   } else {
+    //     msg.amount = 0;
+    //     msg.paymentStatus = null;
+    //   }
+    // }
 
-    res.json(messages);
+    return messages;
   } catch (err) {
     throw err;
   }
