@@ -4,8 +4,10 @@ import { createOrderService, verifyOrderService } from '../services/payment.serv
 
 async function createOrder(req, res, next) {
     try {
+        console.log("create order: ", req.body);
         const order = await createOrderService(req.body);
-        return res.status(200).json({ data: order });
+        console.log("order response", order);
+        return res.status(200).json(order);
     } catch (error) {
        
         return res.status(500).json({

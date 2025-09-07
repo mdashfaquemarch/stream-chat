@@ -19,13 +19,16 @@ export function messageSocketHandler(io, socket) {
                 message: "this is not allowed",
             })
         }
+        console.log('message',data);
+
         
         const createdMessage = await sendMessageService({
             username,
             message,
             chatRoomId,
         })
-
+        console.log('message created',createdMessage);
+        
         io.to(slug).emit("new-message", createdMessage);
     });
 }
